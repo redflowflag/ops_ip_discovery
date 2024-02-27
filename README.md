@@ -1,6 +1,6 @@
 ### usage: 
 ```shell
-python .\BatchCheck.py  <ip_list.txt>  --ports  "[22,3389, 10050, 161, 5985]"  --keys  "['agent.hostname', 'agent.version']"
+python .\BatchCheck.py  <ip_list.txt>  --ports  "[22,3389, 10050, 161, 5985]"  --zbxkeys  "['agent.hostname', 'agent.version']"
 ```
 
 *return sample:* 
