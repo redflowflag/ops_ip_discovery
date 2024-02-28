@@ -4,15 +4,16 @@ import os
 import sys
 import fire
 import json
+import copy
 
 from scapy import data
 from lib.CheckLib import CheckLib
 
-def dict_to_flat(origin_dict, target_dict={}):
+def dict_to_flat(origin_dict, target_dict):
     keys = origin_dict.keys()
     for key in keys:
         if type(origin_dict[key]) == dict:
-            x = dict_to_flat(origin_dict[key])
+            x = dict_to_flat(origin_dict[key], target_dict)
             target_dict.update(x)
         else:
             target_dict[key] = origin_dict[key]
@@ -34,7 +35,8 @@ def output_result(resultData, output_format="dict", output_file = ""):
         result = []
         str_result = ""
         for rlt in resultData:
-            result.append(dict_to_flat(rlt))
+            x = dict_to_flat(rlt,{})
+            result.append(x)
         if len(result) <= 0:
             print("no data found")
             return
