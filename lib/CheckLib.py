@@ -11,12 +11,13 @@ import os
 class CheckLib:
     
     def __init__(self) -> None:
-        pass
+        self.os_type = platform.system()
+        
 
     def ping_subprocess(self, host) -> bool:
         try:
             # 构建ping命令
-            command = ['ping', '-n', '1', host]
+            command =  ['ping', '-c', '1', '-W', '3', host] if self.os_type != "Windows" else ['ping', '-n', '1', host]
             
             # 运行ping命令并获取输出结果
             result = subprocess.run(command, capture_output=True)
@@ -57,8 +58,8 @@ class CheckLib:
         
     def zbx_get_keys(self, host, port=10050, zbxkeys=["agent.hostname", "agent.version"]) -> list:
 
-        os_type = platform.system()
-        zbx_cmd = "zabbix_get" if os_type != "Windows" else "C:\\zabbix_agent5.0.2\\bin\\zabbix_get.exe"
+        # os_type = platform.system()
+        zbx_cmd = "zabbix_get" if self.os_type != "Windows" else "C:\\zabbix_agent5.0.2\\bin\\zabbix_get.exe"
         returnValue = []
         for key in zbxkeys:
             # try:
