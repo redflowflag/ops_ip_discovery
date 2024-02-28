@@ -6,7 +6,7 @@ import fire
 import json
 import copy
 
-from scapy import data
+# from scapy import data
 from lib.CheckLib import CheckLib
 
 def dict_to_flat(origin_dict, target_dict):
